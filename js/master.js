@@ -1,3 +1,11 @@
+// check if there's loclal storage color option 
+let mainColors = localStorage.getItem("color_option");
+
+if (mainColors !== null){
+  document.documentElement.style.setProperty('--main-color',localStorage.getItem("color_option"))
+}
+
+// ********************************************************************************************************
 // start change background
 
 // select landing page element 
@@ -17,22 +25,9 @@ setInterval(()=>{
 },9000)
 
 // end change background
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// ********************************************************************************************************
+// ********************************************************************************************************
 // Start A Open And Close Window 
-
 
 // select Setting Box element 
 let settingsBox =  document.querySelector(".settings-box");
@@ -50,24 +45,39 @@ toggleSettings.addEventListener("click", () =>{
   Gear.classList.toggle("fa-spin")
 });
 
-
 // End A Open And Close Window 
+// ********************************************************************************************************
 
 
 
-
+// ********************************************************************************************************
 // start switch colors 
 const colorsLi = document.querySelectorAll(".colors-list li")
 
 // Loop For All Li 
 colorsLi.forEach(li => {
   li.addEventListener("click" , (e) => {
-
-    // console.log(e.target.dataset.color);
-
+    
     // set color on root
     document.documentElement.style.setProperty('--main-color',e.target.dataset.color)
-  
+
+    // set color on localStorage 
+    localStorage.setItem("color_option" , e.target.dataset.color)
+
+    // remove active class from all chidrens 
+    e.target.parentElement.querySelectorAll(".active").forEach(element => {
+      element.classList.remove("active");
+    });
+
+    // add active class on self 
+    e.target.classList.add("active");
   })
 });
 // end switch colors 
+// ********************************************************************************************************
+
+
+
+
+
+
